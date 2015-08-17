@@ -12,13 +12,14 @@ var Game = {
 		moves: 0,
 		playon: true,
 
-		play : function() {
+		play: function() {
 			$('.square').on('click', function(e) {
-				if (Game.playon) {
+
+				if (Game.playon && $(this).text() === "") {
 					var player = Game.playerTurn;			
-					$('#'+e.target.id).append($('<p>'+player+'</p>')).addClass('' + player);		
+					$(this).append($('<p>'+player+'</p>')).addClass('' + player);		
 					Game.moves++;
-					Game.playon = Game.checkWin(player);
+					Game.playon = Game.checkWin(player) && Game.checkDraw();
 					Game.switchTurn();
 				} else {
 					return;
@@ -41,15 +42,19 @@ var Game = {
 				$('p').remove();
 				Game.wins = [];
 				Game.moves = 0;
+				Game.playerTurn = 'X';
 				$('.square').removeClass('X');
 				$('.square').removeClass('O');
 				$('#draw').css('display','none');
 				$('#X').css('display','none');
 				$('#O').css('display','none');
+				$('#player-1').css('display','block');
+				$('#player-2').css('display','none');
+
 			})
 		},
 
-		checkWin : function (player) {		
+		checkWin: function (player) {		
 			Game.wins.push($('.col-1.'+player).length);
 			Game.wins.push($('.col-2.'+player).length);
 			Game.wins.push($('.col-3.'+player).length);
@@ -59,13 +64,14 @@ var Game = {
 			Game.wins.push( $('#square1.'+player).add('#square5.'+player).add('#square9.'+player).length);
 			Game.wins.push( $('#square3.'+player).add('#square5.'+player).add('#square7.'+player).length);
 
-			for (var i = 0; i < Game.wins.length; i++){
-				if (Game.wins[i] === 3){
+			for (var i = 0; i < Game.wins.length; i++) {
+				if (Game.wins[i] === 3) {
 					$('#'+player).css('display','block');
 					return false;
 				}  
 			} return true;
 		},
+
 		checkDraw: function() {
 			if (Game.moves === 9) {
 				$('#draw').css('display','block');
@@ -74,7 +80,6 @@ var Game = {
 				return true;
 			}
 		}
-
 }
 
 
