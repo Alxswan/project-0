@@ -1,3 +1,27 @@
-body {
-	background-color: aquamarine;
+.container {
+	width: 800px;
+	margin: auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+.board {
+	width: 600px;
+	height: 600px;
+	border: 2px solid black;
+	margin: auto;
+}
+
+.row {
+	width: 600px;
+}
+
+.square {
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+	border: 2px solid black;
+	margin: -4px;
 }
