@@ -1,5 +1,6 @@
 .container {
 	width: 900px;
+	height: 100%;
 	margin: auto;
 }
 
@@ -8,8 +9,22 @@
 	margin: auto;
 }
 
+.heading {
+	width: 600px;
+	margin: auto;
+	/*display: inline-block;*/
+}
+
+img {
+	width: 198px;
+	height: 198px;
+	position: absolute;
+}
+
 h1 {
 	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .board p {
@@ -56,4 +71,41 @@ h1 {
 
 #draw {
 	display: none;
+}
+
+.player-turn {
+	width: 140px;
+	display: inline-block;
+	position: absolute;
+}
+
+.new-game {
+	width: 140px;
+	display: block
+}
+
+.scoreboard {
+	width: 137px;
+	border: 2px solid black;
+	float: right;
+	display: inline-block;
+}
+
+.scoreboard h3 {
+	text-align: center;
+}
+
+h5 {
+	margin: 0.67em;
+	margin-left: 0px;
+}
+
+.winner{
+	position: absolute;
+}
+
+.mix-it-up {
+	width: 160px;
+	margin-top: 500px;
+
 }

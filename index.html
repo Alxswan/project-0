@@ -12,8 +12,10 @@
 
 <body>	
 	<div class="container">
-
+		
+		<div class="heading">
 		<h1>Tic Tac Toe</h1>
+		</div>
 		
 		<div class="board-container">
 
@@ -39,19 +41,27 @@
 
 		</div>
 
+	<div class="new-game">
+		<button>New Game</button>
+	</div>
+
+
 	<div class="player-turn">
-		<h3>Your turn:</h3>
+		<h3>Next turn:</h3>
 		<div class="player" id="player-1">
-			<h4>Player 1 (X)</h4>
+			<h4>Player 1</h4>
 		</div>
 		<div class="player" id="player-2">
-			<h4>Player 2 (O)</h4>
+			<h4>Player 2</h4>
 		</div>
 	</div>
 
 
-	<div class="new-game">
-		<button>New Game</button>
+	
+	<div class="scoreboard">
+		<h2>Scoreboard</h2>
+		<h3>Player 1: <span id="X-total">0</span></h3>
+		<h3>Player 2: <span id="O-total">0</span></h3>
 	</div>
 
 
@@ -62,6 +72,15 @@
 	</div>
 
 
+
+	<div class="mix-it-up">
+		<h5>Mix it up! Player 1:</h5>
+		<button class="bey">Bey</button>
+		<button class="tay">Tay</button>
+		<button class="names">You!</button>
 	</div>
+
+	</div>
+
 </body>
 </html>
