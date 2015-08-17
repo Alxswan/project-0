@@ -41,11 +41,12 @@ var Game = {
 		playName: function() {
 			$('.names').on('click', function() {
 				Game.newGame();
+
 				p1 = prompt("Player 1 name:").slice(0,1).toUpperCase();
 				p2 = prompt("Player 2 name:").slice(0,1).toUpperCase();
 
 				while (p2 === p1) {
-					p2 = prompt("Nah, pick another name player 2!").slice(0,1).toUpperCase();
+					p2 = prompt("Nah, pick another name player 2! (Hint: use a different initial)").slice(0,1).toUpperCase();
 				}
 				Game.playerTurn = p1;
 			})
@@ -67,7 +68,7 @@ var Game = {
 				} else {
 					var add = ($('<p>'+player+'</p>'))
 				}
-					$(this).append(add).addClass('' + player);		
+					$(this).append(add).addClass('' + player).hide().fadeIn();		
 					Game.moves++;
 					Game.playon = Game.checkWin(player);
 					if (Game.playon){
@@ -103,8 +104,13 @@ var Game = {
 				$('.square').removeClass(''+p1);
 				$('.square').removeClass(''+p2);
 				Game.playon = true;
-				$('p').remove();
-				$('img').remove()
+				$('p').fadeOut(function(){
+					$('p').remove();
+				});
+				
+				$('img').fadeOut(function(){
+					$('img').remove();
+				});
 				Game.wins = [];
 				Game.moves = 0;
 				p1 = 'X';
@@ -130,9 +136,12 @@ var Game = {
 		},
 
 		resetScoreboard: function() {
-			$('.reset').on('click', function() {
-				Game.xwin = 0;
-				Game.ywin = 0;
+			$('button.reset').on('click', function() {
+				Game.xWin = 0;
+				Game.oWin = 0;
+				console.log('click')
+				console.log(Game.xWin)
+				console.log(Game.oWin)
 				$('#p1-total').text(""+Game.xWin);
 				$('#p2-total').text(""+Game.oWin);
 			})
@@ -195,5 +204,6 @@ $(document).ready(function () {
 	Game.playBey();
 	Game.playTay();
 	Game.playName();
+	Game.resetScoreboard();
 
 });
