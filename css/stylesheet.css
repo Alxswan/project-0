@@ -12,7 +12,6 @@
 .heading {
 	width: 600px;
 	margin: auto;
-	/*display: inline-block;*/
 }
 
 img {
@@ -81,7 +80,8 @@ h1 {
 
 .new-game {
 	width: 140px;
-	display: block
+	display: block;
+	margin-top: 50px;
 }
 
 .scoreboard {
@@ -89,10 +89,17 @@ h1 {
 	border: 2px solid black;
 	float: right;
 	display: inline-block;
+	margin-top: -20px;
+	margin-left: 10px;
 }
 
 .scoreboard h3 {
 	text-align: center;
+}
+
+.reset {
+	margin-left: 38px;
+	margin-bottom: 5px;
 }
 
 h5 {

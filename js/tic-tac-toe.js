@@ -43,6 +43,10 @@ var Game = {
 				Game.newGame();
 				p1 = prompt("Player 1 name:").slice(0,1).toUpperCase();
 				p2 = prompt("Player 2 name:").slice(0,1).toUpperCase();
+
+				while (p2 === p1) {
+					p2 = prompt("Nah, pick another name player 2!").slice(0,1).toUpperCase();
+				}
 				Game.playerTurn = p1;
 			})
 		},
@@ -117,11 +121,20 @@ var Game = {
 
 		},
 
-		reset: function(){ 
+		resetGame: function() { 
 			$('.new-game').on('click', function() {
 				Game.bey = false;
 				Game.tay = false;
 				Game.newGame()
+			})
+		},
+
+		resetScoreboard: function() {
+			$('.reset').on('click', function() {
+				Game.xwin = 0;
+				Game.ywin = 0;
+				$('#p1-total').text(""+Game.xWin);
+				$('#p2-total').text(""+Game.oWin);
 			})
 		},
 
@@ -138,14 +151,18 @@ var Game = {
 			for (var i = 0; i < Game.wins.length; i++) {
 				if (Game.wins[i] === 3) {
 					$('#'+player).css('display','block');
+
 					$('.player-turn').css('display', 'none');
 					
-					if (player === 'X'){
+					if (player === p1){
 						Game.xWin++;
-						$('#X-total').text(""+Game.xWin);
+						console.log(Game.xWin);
+						console.log(player)
+						console.log(p1)
+						$('#p1-total').text(""+Game.xWin);
 					} else {
 						Game.oWin++;
-						$('#O-total').text(""+Game.oWin);
+						$('#p2-total').text(""+Game.oWin);
 					}		
 					return false;
 				}  
@@ -174,7 +191,7 @@ var Game = {
 
 $(document).ready(function () {
 	Game.play();
-	Game.reset();
+	Game.resetGame();
 	Game.playBey();
 	Game.playTay();
 	Game.playName();
