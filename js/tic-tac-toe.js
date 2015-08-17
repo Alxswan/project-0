@@ -61,9 +61,9 @@ var Game = {
 			Game.wins.push($('.col-1.'+player).length);
 			Game.wins.push($('.col-2.'+player).length);
 			Game.wins.push($('.col-3.'+player).length);
-			Game.wins.push($('#row-1').children(""+player).length);
-			Game.wins.push($('#row-2').children(""+player).length);
-			Game.wins.push($('#row-3').children(""+player).length);
+			Game.wins.push($('#row-1').children("."+player).length);
+			Game.wins.push($('#row-2').children("."+player).length);
+			Game.wins.push($('#row-3').children("."+player).length);
 			Game.wins.push( $('#square1.'+player).add('#square5.'+player).add('#square9.'+player).length);
 			Game.wins.push( $('#square3.'+player).add('#square5.'+player).add('#square7.'+player).length);
 
@@ -84,8 +84,6 @@ var Game = {
 			}
 		}
 }
-
-
 
 // help: long version
 // $('.row').each(function (rowNumber) {
