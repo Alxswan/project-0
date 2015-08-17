@@ -1,5 +1,10 @@
 .container {
-	width: 800px;
+	width: 900px;
+	margin: auto;
+}
+
+.board-container {
+	width: 600px;
 	margin: auto;
 }
 
@@ -7,7 +12,16 @@ h1 {
 	text-align: center;
 }
 
+.board p {
+	margin: 0px;
+	width: 200px;
+	height: 200px;
+	font-size: 180px;
+	text-align: center;
+}
+
 .board {
+	position: absolute;
 	width: 600px;
 	height: 600px;
 	border: 2px solid black;
@@ -16,6 +30,7 @@ h1 {
 
 .row {
 	width: 600px;
+	height: 200px;
 }
 
 .square {
@@ -24,4 +39,16 @@ h1 {
 	height: 200px;
 	border: 2px solid black;
 	margin: -4px;
+}
+
+.full-O {
+	display: none;
+}
+
+.full-X {
+	display: none;
+}
+
+.player-2 {
+	display: none;
 }
