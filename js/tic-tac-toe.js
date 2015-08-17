@@ -19,7 +19,10 @@ var Game = {
 					var player = Game.playerTurn;			
 					$(this).append($('<p>'+player+'</p>')).addClass('' + player);		
 					Game.moves++;
-					Game.playon = Game.checkWin(player) && Game.checkDraw();
+					Game.playon = Game.checkWin(player);
+					if (Game.playon){
+						Game.playon = Game.checkDraw();
+					} 
 					Game.switchTurn();
 				} else {
 					return;
