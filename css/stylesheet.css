@@ -42,18 +42,18 @@ h1 {
 	margin: -4px;
 }
 
-.full-O {
-	display: none;
-}
-
-.full-O .square1 {
-	display: inline-block;
-}
-
-.full-X {
-	display: none;
-}
-
 #player-2 {
+	display: none;
+}
+
+#X {
+	display: none;
+}
+
+#O {
+	display: none;
+}
+
+#draw {
 	display: none;
 }

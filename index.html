@@ -18,19 +18,19 @@
 		<div class="board-container">
 
 			<div class="board empty">
-				<div class="row">
+				<div class="row" id="row-1">
 					<div class="square col-1" id="square1"></div>
 					<div class="square col-2" id="square2"></div>
 					<div class="square col-3" id="square3"></div>
 				</div>
 
-				<div class="row">
+				<div class="row" id="row-2">
 					<div class="square col-1" id="square4"></div>
 					<div class="square col-2" id="square5"></div>
 					<div class="square col-3" id="square6"></div>
 				</div>
 
-				<div class="row">
+				<div class="row" id="row-3">
 					<div class="square col-1" id="square7"></div>
 					<div class="square col-2" id="square8"></div>
 					<div class="square col-3" id="square9"></div>			
@@ -127,8 +127,16 @@
 		</div>
 	</div>
 
+
 	<div class="new-game">
 		<button>New Game</button>
+	</div>
+
+
+	<div class="winner">
+		<h3 id="X">Player 1 wins!</h3>
+		<h3 id="O">Player 2 wins!</h3>
+		<h3 id="draw">Draw!</h3>
 	</div>
 
 
