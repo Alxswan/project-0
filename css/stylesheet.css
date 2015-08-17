@@ -14,6 +14,7 @@ h1 {
 
 .board p {
 	margin: 0px;
+	position: absolute;
 	width: 200px;
 	height: 200px;
 	font-size: 180px;
@@ -45,10 +46,14 @@ h1 {
 	display: none;
 }
 
+.full-O .square1 {
+	display: inline-block;
+}
+
 .full-X {
 	display: none;
 }
 
-.player-2 {
+#player-2 {
 	display: none;
 }
