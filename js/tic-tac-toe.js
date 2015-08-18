@@ -69,6 +69,62 @@ var Game = {
 					} 			
 		},
 
+		switchTurn: function() {
+			if (Game.playerTurn === p1){
+				Game.playerTurn = p2;
+			} else {
+				Game.playerTurn = p1;
+			}
+
+			if (Game.bey === true && Game.tay === false) {
+				Game.bey = false;
+				Game.tay = true;
+			} else if (Game.tay === true && Game.bey === false){
+				Game.tay = false;
+				Game.bey = true;
+			}
+			$('.player').toggle();
+		},
+
+		checkWin: function (player) {	
+			
+			Game.lastPlayerWins.push($('.col-1.'+player).length);
+			Game.lastPlayerWins.push($('.col-2.'+player).length);
+			Game.lastPlayerWins.push($('.col-3.'+player).length);
+			Game.lastPlayerWins.push($('#row-1').children("."+player).length);
+			Game.lastPlayerWins.push($('#row-2').children("."+player).length);
+			Game.lastPlayerWins.push($('#row-3').children("."+player).length);
+			Game.lastPlayerWins.push($('.diag-1.'+player).length);
+			Game.lastPlayerWins.push($('.diag-2.'+player).length);
+
+			for (var i = 0; i < Game.lastPlayerWins.length; i++) {
+				if (Game.lastPlayerWins[i] === Game.boardSize) {
+					$('#'+player).css('display','block');
+					$('.player-turn').css('display', 'none');
+					
+					if (player === p1){
+						Game.xWin++;
+						$('#p1-total').text(""+Game.xWin);
+					} else {
+						Game.oWin++;
+						$('#p2-total').text(""+Game.oWin);
+					}		
+					return false;
+				}  
+			} 				
+				return true;
+		},
+
+		checkDraw: function() {
+			if (Game.moves === Game.boardSize * Game.boardSize) {
+				$('#draw').css('display','block');
+				$('.player-turn').css('display', 'none');
+				return false;
+			} else {
+				return true;
+			}
+		},
+
 		playfourByFour: function() {
 			$('.4x4').on('click', function() {
 				if (!Game.fourbyfour) {
@@ -152,21 +208,11 @@ var Game = {
 			})
 		},
 
-		switchTurn: function() {
-			if (Game.playerTurn === p1){
-				Game.playerTurn = p2;
-			} else {
-				Game.playerTurn = p1;
-			}
-
-			if (Game.bey === true && Game.tay === false) {
-				Game.bey = false;
-				Game.tay = true;
-			} else if (Game.tay === true && Game.bey === false){
-				Game.tay = false;
-				Game.bey = true;
-			}
-			$('.player').toggle();
+		playAI: function() {
+			$('.AI').on('click', function() {
+				Game.newGame();
+				Game.AI = true;
+			})
 		},
 
 		newGame: function() {
@@ -216,76 +262,33 @@ var Game = {
 				$('#p1-total').text(""+Game.xWin);
 				$('#p2-total').text(""+Game.oWin);
 			})
-		},
-
-		checkWin: function (player) {	
-			
-			Game.lastPlayerWins.push($('.col-1.'+player).length);
-			Game.lastPlayerWins.push($('.col-2.'+player).length);
-			Game.lastPlayerWins.push($('.col-3.'+player).length);
-			Game.lastPlayerWins.push($('#row-1').children("."+player).length);
-			Game.lastPlayerWins.push($('#row-2').children("."+player).length);
-			Game.lastPlayerWins.push($('#row-3').children("."+player).length);
-			Game.lastPlayerWins.push($('.diag-1.'+player).length);
-			Game.lastPlayerWins.push($('.diag-2.'+player).length);
-
-			for (var i = 0; i < Game.lastPlayerWins.length; i++) {
-				if (Game.lastPlayerWins[i] === Game.boardSize) {
-					$('#'+player).css('display','block');
-					$('.player-turn').css('display', 'none');
-					
-					if (player === p1){
-						Game.xWin++;
-						$('#p1-total').text(""+Game.xWin);
-					} else {
-						Game.oWin++;
-						$('#p2-total').text(""+Game.oWin);
-					}		
-					return false;
-				}  
-			} 				
-				return true;
-		},
-
-		checkDraw: function() {
-			if (Game.moves === Game.boardSize * Game.boardSize) {
-				$('#draw').css('display','block');
-				$('.player-turn').css('display', 'none');
-				return false;
-			} else {
-				return true;
-			}
-		},
-
-		playAI: function() {
-			$('.AI').on('click', function() {
-				Game.newGame();
-				Game.AI = true;
-			})
-		}
+		},		
 }
 
 var AI = {
 
 	wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
 
-	play: function() {		
-		
+	play: function() {				
 		if (Game.moves < 9 && $('.center').hasClass('X')) {
-			
+
 			this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
+
 		} else if (Game.moves < 9 && !$('.center').hasClass('X')){
+
 				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay() ;
 		}
+		
+		Game.gameCheck('O');
+		Game.switchTurn();
 		return;
 	},
 
 	centerPlay: function() {
-
 		if (!($('.row-2.col-2').is('.O,.X'))) {
 			$('.row-2.col-2').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-			Game.gameCheck('O');
-			Game.switchTurn();
+			// Game.gameCheck('O');
+			// Game.switchTurn();
 			return true;
 		} 	return false;
 	},
@@ -294,14 +297,10 @@ var AI = {
 			var corners = $('.corner').not('.O').not('.X')
 			if (corners.length < 3){
 			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-			Game.gameCheck('O');
-			Game.switchTurn();
 			return true;
 			}
 			else if (corners.length >= 3) {
 			corners.eq(2).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-			Game.gameCheck('O');
-			Game.switchTurn();
 			return true;
 		} return false;
 	},
@@ -310,8 +309,6 @@ var AI = {
 			var edges = $('.edge').not('.O').not('.X')
 			if (edges.length >= 2) {
 				edges.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-				Game.gameCheck('O');
-				Game.switchTurn();
 				return true;
 		} return false;
 	},
@@ -319,25 +316,18 @@ var AI = {
 	specialEdgePlay: function() {
 			if ($('.row-1.col-1').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-1').hasClass('O') ) {
 				$('.row-2.col-1').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-				Game.gameCheck('O');
-				Game.switchTurn();
 				return true;
 			} else if ($('.row-1.col-3').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-3').hasClass('O') && $('.edge').not('.O').not('.X').length > 2) {
 				$('.row-2.col-3').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-				Game.gameCheck('O');
-				Game.switchTurn();
 				return true;
 			} return false;
 	},
 
 	blockMove: function(){
-		// debugger;
 		for (var i = 0; i < Game.lastPlayerWins.length; i++){
 			if (Game.lastPlayerWins[i] === 2 && Game.nextPlayerWins[i] === 0){
 				var move = AI.wins[i];
 				var add = $(''+move).not('.X').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-				Game.gameCheck('O');
-				Game.switchTurn();
 				return true;
 			}
 		} return false;
@@ -348,8 +338,6 @@ var AI = {
 			if (Game.nextPlayerWins[i] === 2 && Game.lastPlayerWins[i] === 0){
 				var move = AI.wins[i];
 				var add = $(''+move).not('.O').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
-				Game.gameCheck('O');
-				Game.switchTurn();
 				return true;
 			}
 		} return false; 
