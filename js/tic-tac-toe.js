@@ -13,7 +13,8 @@ var Game = {
 
 		initialise: function() {
 			this.playerTurn = p1;	
-			this.wins = [];	
+			this.lastPlayerWins = [];	
+			this.nextPlayerWins = [];
 			this.moves = 0;	
 			this.playon = true;	
 			this.xWin = 0;	
@@ -26,7 +27,7 @@ var Game = {
 		},
 
 		play: function() {
-			$('.square').on('click', function(e) {
+			$('.square').on('click', function(e) {	
 
 				if (Game.playon && ($(this).text() === "") && $(this).children('img').length === 0) {
 					var player = Game.playerTurn;
@@ -40,18 +41,29 @@ var Game = {
 				} else {
 					var add = ($('<p>'+player+'</p>'))
 				}
-					$(this).append(add).addClass('' + player).hide().fadeIn();	
-					Game.moves++;
-					Game.playon = Game.checkWin(player);
-					if (Game.playon){
-						Game.playon = Game.checkDraw();
-					} 
-					
-					Game.switchTurn();
+				
+				$(this).append(add).addClass('' + player).hide().fadeIn();	
+				
+				Game.gameCheck(player);
+				Game.switchTurn();
+
 				} else {
 					return;
 				}
 			})
+		},
+
+		gameCheck: function(player) {
+					Game.nextPlayerWins = Game.lastPlayerWins;
+					Game.lastPlayerWins = [];
+					Game.moves++;
+					Game.playon = Game.checkWin(player);
+					if (Game.playon) {
+						Game.playon = Game.checkDraw();
+					} 	
+					console.log("last player: "+Game.lastPlayerWins);
+					console.log("next player: "+Game.nextPlayerWins);
+					console.log("Game moves"+ Game.moves)			
 		},
 
 		playfourByFour: function() {
@@ -154,12 +166,12 @@ var Game = {
 				Game.playon = true;
 				$('p').fadeOut(function(){
 					$('p').remove();
-				});
-				
+				});		
 				$('img').fadeOut(function(){
 					$('img').remove();
 				});
-				Game.wins = [];
+				Game.lastPlayerWins = [];
+				Game.nextPlayerWins = [];
 				Game.moves = 0;
 				p1 = 'X';
 				p2 = 'O';
@@ -195,18 +207,18 @@ var Game = {
 		},
 
 		checkWin: function (player) {	
-			Game.wins = [];	
-			Game.wins.push($('.col-1.'+player).length);
-			Game.wins.push($('.col-2.'+player).length);
-			Game.wins.push($('.col-3.'+player).length);
-			Game.wins.push($('#row-1').children("."+player).length);
-			Game.wins.push($('#row-2').children("."+player).length);
-			Game.wins.push($('#row-3').children("."+player).length);
-			Game.wins.push($('.diag-1.'+player).length);
-			Game.wins.push($('.diag-2.'+player).length);
+			
+			Game.lastPlayerWins.push($('.col-1.'+player).length);
+			Game.lastPlayerWins.push($('.col-2.'+player).length);
+			Game.lastPlayerWins.push($('.col-3.'+player).length);
+			Game.lastPlayerWins.push($('#row-1').children("."+player).length);
+			Game.lastPlayerWins.push($('#row-2').children("."+player).length);
+			Game.lastPlayerWins.push($('#row-3').children("."+player).length);
+			Game.lastPlayerWins.push($('.diag-1.'+player).length);
+			Game.lastPlayerWins.push($('.diag-2.'+player).length);
 
-			for (var i = 0; i < Game.wins.length; i++) {
-				if (Game.wins[i] === Game.boardSize) {
+			for (var i = 0; i < Game.lastPlayerWins.length; i++) {
+				if (Game.lastPlayerWins[i] === Game.boardSize) {
 					$('#'+player).css('display','block');
 
 					$('.player-turn').css('display', 'none');
@@ -220,9 +232,7 @@ var Game = {
 					}		
 					return false;
 				}  
-
-			} 
-				
+			} 				
 				return true;
 		},
 
@@ -239,13 +249,53 @@ var Game = {
 
 var AI = {
 
-	block: function(){
+	wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
 
-	},
+		centerPlay: function() {
+			if (!this.blockMove() && !this.winMove()){
+				$('.row-2.col-2').append($('<p>O</p>')).addClass('O');
+			} 	
+			Game.gameCheck('O');
+			Game.switchTurn();
+		},
 
-	win: function() {
-		//if Game.checkWin
-	}
+		cornerPlay: function() {
+			if (!this.blockMove() && !this.winMove()){
+				var corners = $('.corner').not('.O').not('.X')
+				corners.eq(0).append($('<p>O</p>')).addClass('O');
+			}
+			Game.gameCheck('O');
+			Game.switchTurn();
+		},
+
+		edgePlay: function() {
+			
+		}
+
+		blockMove: function(){
+			// debugger;
+			for (var i = 0; i < Game.lastPlayerWins.length; i++){
+				if (Game.lastPlayerWins[i] === 2 && Game.nextPlayerWins[i] === 0){
+					var move = AI.wins[i];
+					var add = $(''+move).not('.X').append($('<p>O</p>')).addClass('O')
+					Game.gameCheck('O');
+					Game.switchTurn();
+					return add;
+				}
+			}	
+		},
+
+		winMove: function() {
+			for (var i = 0; i < Game.nextPlayerWins.length; i++){
+				if (Game.nextPlayerWins[i] === 2 && Game.lastPlayerWins[i] === 0){
+					var move = AI.wins[i];
+					var add = $(''+move).not('.O').append($('<p>O</p>')).addClass('O');
+					Game.gameCheck('O');
+					Game.switchTurn();
+					return add;
+				}
+			} 
+		},
 }
 
 // help: long version
@@ -259,6 +309,7 @@ var AI = {
 $(document).ready(function () {
 	Game.initialise();
 	Game.play();
+	// Game.gameCheck();
 	Game.resetGame();
 	Game.playBey();
 	Game.playTay();
