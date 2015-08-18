@@ -6,7 +6,29 @@
 	height: 100%;
 	margin: auto;
 	font-family:'Lato', sans-serif;
-	
+
+}
+
+/*button {
+  position: relative;
+  vertical-align: top;
+  width: 90%;
+  height: 50px;
+  padding: 0;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #f1c40f;
+  border: 0;
+  border-bottom: 2px solid #e2b607;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #e2b607;
+  box-shadow: inset 0 -2px #e2b607;
+}*/
+
+#row1 {
+	border-top: 0px;
 }
 
 .board-container {
@@ -22,12 +44,8 @@
 
 img {
 	width: 198px;
-	height: 198px;
+	height: 203px;
 	position: absolute;
-}
-
-.button {
-
 }
 
 h1 {
@@ -47,11 +65,12 @@ h1 {
 	text-align: center;
 }
 
+
 .board {
 	position: absolute;
 	width: 600px;
 	height: 600px;
-	border: 2px solid black;
+	/*border: 2px solid black;*/
 	margin: auto;
 }
 
@@ -63,10 +82,39 @@ h1 {
 .square {
 	display: inline-block;
 	width: 200px;
-	height: 200px;
-	border: 2px solid black;
+	height: 204px;
+	/*border: 2px solid black;*/
 	margin: -3.5px;
+	z-index: 1;
 }
+
+.col-1 {
+	border-right: 2px solid black;
+}
+
+.col-2 {
+	border-right: 2px solid black;
+	border-left: 2px solid black;
+}
+
+.col-3 {
+	border-left: 2px solid black;
+}
+
+#row-1 {
+	border-bottom: 2px solid black;
+}
+
+#row-2 {
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+
+#row-3 {
+	border-top: 2px solid black;
+}
+
 
 #player-2 {
 	display: none;
@@ -130,6 +178,6 @@ h5 {
 
 .mix-it-up {
 	width: 160px;
-	margin-top: 500px;
+	margin-top: 350px;
 
 }
