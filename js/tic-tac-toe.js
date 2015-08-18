@@ -136,6 +136,7 @@ var Game = {
 		playName: function() {
 			$('.names').on('click', function() {
 				Game.newGame();
+				Game.AI = false;
 
 				p1 = prompt("Player 1 name:").slice(0,1).toUpperCase();
 				p2 = prompt("Player 2 name:").slice(0,1).toUpperCase();
@@ -143,7 +144,11 @@ var Game = {
 				while (p2 === p1) {
 					p2 = prompt("Nah, pick another name player 2! (Hint: use a different initial)").slice(0,1).toUpperCase();
 				}
+
+				$('#X').attr('id', ''+p1);
+				$('#O').attr('id', ''+p2);
 				Game.playerTurn = p1;
+
 			})
 		},
 
@@ -178,6 +183,8 @@ var Game = {
 				Game.lastPlayerWins = [];
 				Game.nextPlayerWins = [];
 				Game.moves = 0;
+				$('#'+p1).attr('id', 'X');
+				$('#O'+p1).attr('id', 'Y');
 				p1 = 'X';
 				p2 = 'O';
 				Game.playerTurn = p1;
@@ -225,7 +232,6 @@ var Game = {
 			for (var i = 0; i < Game.lastPlayerWins.length; i++) {
 				if (Game.lastPlayerWins[i] === Game.boardSize) {
 					$('#'+player).css('display','block');
-
 					$('.player-turn').css('display', 'none');
 					
 					if (player === p1){
@@ -285,7 +291,6 @@ var AI = {
 	},
 
 	cornerPlay: function() {
-		// debugger;
 			var corners = $('.corner').not('.O').not('.X')
 			if (corners.length < 3){
 			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
@@ -302,7 +307,6 @@ var AI = {
 	},
 
 	edgePlay: function() {
-		// debugger;
 			var edges = $('.edge').not('.O').not('.X')
 			if (edges.length >= 2) {
 				edges.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
@@ -324,7 +328,6 @@ var AI = {
 				Game.switchTurn();
 				return true;
 			} return false;
-
 	},
 
 	blockMove: function(){
@@ -337,7 +340,6 @@ var AI = {
 				Game.switchTurn();
 				return true;
 			}
-
 		} return false;
 	},
 
