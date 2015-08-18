@@ -66,10 +66,7 @@ var Game = {
 					Game.playon = Game.checkWin(player);
 					if (Game.playon) {
 						Game.playon = Game.checkDraw();
-					} 	
-					console.log("last player: "+Game.lastPlayerWins);
-					console.log("next player: "+Game.nextPlayerWins);
-					console.log("Game moves"+ Game.moves)			
+					} 			
 		},
 
 		playfourByFour: function() {
@@ -268,12 +265,17 @@ var AI = {
 
 	play: function() {		
 		
-		if (Game.moves < 9) {
-		this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay() ;}
+		if (Game.moves < 9 && $('.center').hasClass('X')) {
+			
+			this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
+		} else if (Game.moves < 9 && !$('.center').hasClass('X')){
+				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay() ;
+		}
 		return;
 	},
 
 	centerPlay: function() {
+
 		if (!($('.row-2.col-2').is('.O,.X'))) {
 			$('.row-2.col-2').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
 			Game.gameCheck('O');
@@ -283,8 +285,15 @@ var AI = {
 	},
 
 	cornerPlay: function() {
+		// debugger;
 			var corners = $('.corner').not('.O').not('.X')
-			if (corners.length !== 0) {
+			if (corners.length < 3){
+			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
+			Game.gameCheck('O');
+			Game.switchTurn();
+			return true;
+			}
+			else if (corners.length >= 3) {
 			corners.eq(2).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
 			Game.gameCheck('O');
 			Game.switchTurn();
@@ -293,8 +302,9 @@ var AI = {
 	},
 
 	edgePlay: function() {
+		// debugger;
 			var edges = $('.edge').not('.O').not('.X')
-			if (edges.length > 2) {
+			if (edges.length >= 2) {
 				edges.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
 				Game.gameCheck('O');
 				Game.switchTurn();
