@@ -22,6 +22,82 @@ var Game = {
 			this.tay = false;	
 			this.beyPic = '<img src="images/bey.jpg" alt="">';	
 			this.tayPic = '<img src="images/tay.jpeg" alt="">';	
+			this.boardSize = 3;
+		},
+
+		play: function() {
+			$('.square').on('click', function(e) {
+
+				if (Game.playon && ($(this).text() === "") && $(this).children('img').length === 0) {
+					var player = Game.playerTurn;
+					
+				if (Game.bey) {
+					var add = ($(Game.beyPic));
+
+				} else if (Game.tay) {
+					var add = ($(Game.tayPic));
+
+				} else {
+					var add = ($('<p>'+player+'</p>'))
+				}
+					$(this).append(add).addClass('' + player).hide().fadeIn();	
+					Game.moves++;
+					Game.playon = Game.checkWin(player);
+					if (Game.playon){
+						Game.playon = Game.checkDraw();
+					} 
+					
+					Game.switchTurn();
+				} else {
+					return;
+				}
+			})
+		},
+
+		playfourByFour: function() {
+			$('.4x4').on('click', function() {
+				Game.boardSize = 4;
+
+				$('.board').removeClass('three').addClass('four');
+
+				$('.row').each(function() {
+					$(this).append($('<div class="square col-4"></div>'));
+				})
+
+				$('#row-3').clone().prop({id: "row-4"}).appendTo($('.board'));
+
+				$('.row').children().removeClass('diag-2');
+
+				$('#row-4').find($('.col-4')).addClass('diag-1');
+				$('#row-4').find($('.col-1')).addClass('diag-2');
+				$('#row-3').find($('.col-2')).addClass('diag-2');
+				$('#row-2').find($('.col-3')).addClass('diag-2');
+				$('#row-1').find($('.col-4')).addClass('diag-2');
+			
+				Game.play();
+
+			})
+		},
+
+		playNormal: function() {
+			$('.normal').on('click', function() {
+				Game.boardSize = 3;
+				$('.board').removeClass('four').addClass('three');
+
+				$('.row').each( function() {
+					$('.col-4').remove()
+				})
+
+				$('.row').children().removeClass('diag-2');
+				$('#row-3').find($('.col-1')).addClass('diag-2');
+				$('#row-2').find($('.col-2')).addClass('diag-2');
+				$('#row-1').find($('.col-3')).addClass('diag-2');
+
+				$('#row-4').remove();
+
+				Game.play();
+
+			})
 		},
 
 		playBey: function() {
@@ -51,35 +127,6 @@ var Game = {
 					p2 = prompt("Nah, pick another name player 2! (Hint: use a different initial)").slice(0,1).toUpperCase();
 				}
 				Game.playerTurn = p1;
-			})
-		},
-
-		play: function() {
-			$('.square').on('click', function(e) {
-
-				if (Game.playon && ($(this).text() === "") && $(this).children('img').length === 0) {
-					var player = Game.playerTurn;
-					
-				if (Game.bey) {
-					var add = ($(Game.beyPic));
-
-				} else if (Game.tay) {
-					var add = ($(Game.tayPic));
-
-				} else {
-					var add = ($('<p>'+player+'</p>'))
-				}
-					$(this).append(add).addClass('' + player).hide().fadeIn();		
-					Game.moves++;
-					Game.playon = Game.checkWin(player);
-					if (Game.playon){
-						Game.playon = Game.checkDraw();
-					} 
-					
-					Game.switchTurn();
-				} else {
-					return;
-				}
 			})
 		},
 
@@ -147,27 +194,25 @@ var Game = {
 			})
 		},
 
-		checkWin: function (player) {		
+		checkWin: function (player) {	
+			Game.wins = [];	
 			Game.wins.push($('.col-1.'+player).length);
 			Game.wins.push($('.col-2.'+player).length);
 			Game.wins.push($('.col-3.'+player).length);
 			Game.wins.push($('#row-1').children("."+player).length);
 			Game.wins.push($('#row-2').children("."+player).length);
 			Game.wins.push($('#row-3').children("."+player).length);
-			Game.wins.push( $('#square1.'+player).add('#square5.'+player).add('#square9.'+player).length);
-			Game.wins.push( $('#square3.'+player).add('#square5.'+player).add('#square7.'+player).length);
+			Game.wins.push($('.diag-1.'+player).length);
+			Game.wins.push($('.diag-2.'+player).length);
 
 			for (var i = 0; i < Game.wins.length; i++) {
-				if (Game.wins[i] === 3) {
+				if (Game.wins[i] === Game.boardSize) {
 					$('#'+player).css('display','block');
 
 					$('.player-turn').css('display', 'none');
 					
 					if (player === p1){
 						Game.xWin++;
-						console.log(Game.xWin);
-						console.log(player)
-						console.log(p1)
 						$('#p1-total').text(""+Game.xWin);
 					} else {
 						Game.oWin++;
@@ -176,11 +221,13 @@ var Game = {
 					return false;
 				}  
 
-			} return true;
+			} 
+				
+				return true;
 		},
 
 		checkDraw: function() {
-			if (Game.moves === 9) {
+			if (Game.moves === Game.boardSize * Game.boardSize) {
 				$('#draw').css('display','block');
 				$('.player-turn').css('display', 'none');
 				return false;
@@ -188,6 +235,17 @@ var Game = {
 				return true;
 			}
 		}
+}
+
+var AI = {
+
+	block: function(){
+
+	},
+
+	win: function() {
+		//if Game.checkWin
+	}
 }
 
 // help: long version
@@ -204,6 +262,8 @@ $(document).ready(function () {
 	Game.resetGame();
 	Game.playBey();
 	Game.playTay();
+	Game.playfourByFour();
+	Game.playNormal();
 	Game.playName();
 	Game.resetScoreboard();
 
