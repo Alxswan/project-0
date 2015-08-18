@@ -24,6 +24,7 @@ var Game = {
 			this.beyPic = '<img src="images/bey.jpg" alt="">';	
 			this.tayPic = '<img src="images/tay.jpeg" alt="">';	
 			this.boardSize = 3;
+			this.AI = false;
 		},
 
 		play: function() {
@@ -45,7 +46,11 @@ var Game = {
 				$(this).append(add).addClass('' + player).hide().fadeIn();	
 				
 				Game.gameCheck(player);
-				Game.switchTurn();
+				
+				if (Game.AI) {
+					AI.play();
+					Game.switchTurn();
+				} else Game.switchTurn();
 
 				} else {
 					return;
@@ -244,57 +249,77 @@ var Game = {
 			} else {
 				return true;
 			}
+		},
+
+		playAI: function() {
+			$('.AI').on('click', function() {
+				Game.AI = true;
+				console.log(Game.AI);
+			})
 		}
 }
 
 var AI = {
 
-	wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
+		wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
+
+		play: function() {		
+			this.winMove() || this.blockMove() || this.centerPlay() || this.cornerPlay() || this.edgePlay();
+			return;
+		},
 
 		centerPlay: function() {
-			if (!this.blockMove() && !this.winMove()){
-				$('.row-2.col-2').append($('<p>O</p>')).addClass('O');
-			} 	
-			Game.gameCheck('O');
-			Game.switchTurn();
+			if (!($('.row-2.col-2').is('.O,.X'))) {
+				$('.row-2.col-2').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
+				Game.gameCheck('O');
+				Game.switchTurn();
+				return true;
+			} 	return false;
 		},
 
 		cornerPlay: function() {
-			if (!this.blockMove() && !this.winMove()){
 				var corners = $('.corner').not('.O').not('.X')
-				corners.eq(0).append($('<p>O</p>')).addClass('O');
-			}
-			Game.gameCheck('O');
-			Game.switchTurn();
+				if (corners.length !== 0) {
+				corners.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
+				Game.gameCheck('O');
+				Game.switchTurn();
+				return true;
+			} return false;
 		},
 
 		edgePlay: function() {
-			
-		}
+				var edges = $('.edge').not('.O').not('.X')
+				if (edges.length !== 0) {
+					edges.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
+					Game.gameCheck('O');
+					Game.switchTurn();
+					return true;
+			} return false;
+		},
 
 		blockMove: function(){
 			// debugger;
 			for (var i = 0; i < Game.lastPlayerWins.length; i++){
 				if (Game.lastPlayerWins[i] === 2 && Game.nextPlayerWins[i] === 0){
 					var move = AI.wins[i];
-					var add = $(''+move).not('.X').append($('<p>O</p>')).addClass('O')
+					var add = $(''+move).not('.X').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
 					Game.gameCheck('O');
 					Game.switchTurn();
-					return add;
+					return true;
 				}
-			}	
+			} return false;
 		},
 
 		winMove: function() {
 			for (var i = 0; i < Game.nextPlayerWins.length; i++){
 				if (Game.nextPlayerWins[i] === 2 && Game.lastPlayerWins[i] === 0){
 					var move = AI.wins[i];
-					var add = $(''+move).not('.O').append($('<p>O</p>')).addClass('O');
+					var add = $(''+move).not('.O').append($('<p>O</p>')).addClass('O').hide().fadeIn(5000);
 					Game.gameCheck('O');
 					Game.switchTurn();
-					return add;
+					return true;
 				}
-			} 
+			} return false; 
 		},
 }
 
@@ -309,7 +334,6 @@ var AI = {
 $(document).ready(function () {
 	Game.initialise();
 	Game.play();
-	// Game.gameCheck();
 	Game.resetGame();
 	Game.playBey();
 	Game.playTay();
@@ -317,5 +341,6 @@ $(document).ready(function () {
 	Game.playNormal();
 	Game.playName();
 	Game.resetScoreboard();
+	Game.playAI();
 
 });
