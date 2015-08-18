@@ -11,16 +11,18 @@ var p2 = 'O';
 
 var Game = {
 
-		playerTurn: p1,
-		wins: [],
-		moves: 0,
-		playon: true,
-		xWin: 0,
-		oWin: 0,
-		bey: false,
-		tay: false,
-		beyPic: '<img src="images/bey.jpg" alt="">',
-		tayPic: '<img src="images/tay.jpeg" alt="">',
+		initialise: function() {
+			this.playerTurn = p1;	
+			this.wins = [];	
+			this.moves = 0;	
+			this.playon = true;	
+			this.xWin = 0;	
+			this.oWin = 0;	
+			this.bey = false;	
+			this.tay = false;	
+			this.beyPic = '<img src="images/bey.jpg" alt="">';	
+			this.tayPic = '<img src="images/tay.jpeg" alt="">';	
+		},
 
 		playBey: function() {
 			$('.bey').on('click', function() {
@@ -51,7 +53,6 @@ var Game = {
 				Game.playerTurn = p1;
 			})
 		},
-
 
 		play: function() {
 			$('.square').on('click', function(e) {
@@ -124,7 +125,6 @@ var Game = {
 				$('#player-2').css('display','none');
 				Game.bey = false;
 				Game.tay = false;
-
 		},
 
 		resetGame: function() { 
@@ -199,6 +199,7 @@ var Game = {
 // });
 
 $(document).ready(function () {
+	Game.initialise();
 	Game.play();
 	Game.resetGame();
 	Game.playBey();
