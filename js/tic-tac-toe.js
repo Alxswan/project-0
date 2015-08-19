@@ -132,17 +132,12 @@ var Game = {
 				if (!Game.fourbyfour) {
 				Game.boardSize = 4;
 				Game.AI = false;
-
 				$('.board').removeClass('three').addClass('four');
-
 				$('.row').each(function() {
 					$(this).append($('<div class="square col-4"></div>'));
 				})
-
 				$('#row-3').clone().prop({id: "row-4"}).appendTo($('.board'));
-
 				$('.row').children().removeClass('diag-2');
-
 				$('#row-4').find($('.col-4')).addClass('diag-1');
 				$('#row-4').find($('.col-1')).addClass('diag-2');
 				$('#row-3').find($('.col-2')).addClass('diag-2');
@@ -181,9 +176,7 @@ var Game = {
 				$('p').remove();
 				$('img').remove();
 				var randomNumber = Math.floor((Math.random() * 7)+1);
-
-				$(''+AI.wins[randomNumber]).append($(Game.beyPic));
-				
+				$(''+AI.wins[randomNumber]).append($(Game.beyPic));				
 				$(''+AI.wins[randomNumber]).eq(0).append($('<p> Bey </p>'));
 				$(''+AI.wins[randomNumber]).eq(1).append($('<p> Always </p>'));
 				$(''+AI.wins[randomNumber]).eq(2).append($('<p> Wins </p>'));
@@ -226,6 +219,20 @@ var Game = {
 				if (!Game.fourbyfour){
 				Game.newGame();
 				Game.AI = true;
+				} else {
+					Game.AI = false;
+				}
+			})
+		},
+
+		playAIp1: function() {
+			$('.firstplay').on('click', function() {
+				if (!Game.fourbyfour){
+				Game.newGame();
+				Game.AI = true;
+				Game.switchTurn();
+				AI.play();
+				
 				} else {
 					Game.AI = false;
 				}
@@ -373,4 +380,5 @@ $(document).ready(function () {
 	Game.playName();
 	Game.resetScoreboard();
 	Game.playAI();
+	Game.playAIp1();
 });
