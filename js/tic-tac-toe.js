@@ -34,10 +34,7 @@ var Game = {
 				if (Game.playon && ($(this).text() === "") && $(this).children('img').length === 0) {
 					var player = Game.playerTurn;
 
-					if (Game.bey) {
-						var add = ($(Game.beyPic));
-
-					} else if (Game.tay) {
+					if (Game.tay) {
 						var add = ($(Game.tayPic));
 
 					} else {
@@ -181,9 +178,19 @@ var Game = {
 
 		playBey: function() {
 			$('.bey').on('click', function() {
-				Game.newGame();
-				Game.bey = true;
-				Game.tay = false;
+				$('p').remove();
+				$('img').remove();
+				var randomNumber = Math.floor((Math.random() * 7)+1);
+
+				$(''+AI.wins[randomNumber]).append($(Game.beyPic));
+				
+				$(''+AI.wins[randomNumber]).eq(0).append($('<p> Bey </p>'));
+				$(''+AI.wins[randomNumber]).eq(1).append($('<p> Always </p>'));
+				$(''+AI.wins[randomNumber]).eq(2).append($('<p> Wins </p>'));
+				$('p').css('font-size', '50px');
+				$('p').css('margin-top', '100px');
+				$('.bey').html('BOW DOWN')
+				
 				})
 		},
 
@@ -278,7 +285,7 @@ var AI = {
 	wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
 
 	play: function() {		
-		if (!Game.bey){		
+		if (!Game.tay){		
 			if (Game.moves < 9 && $('.center').hasClass('X')) {
 				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 

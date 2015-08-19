@@ -4,12 +4,12 @@
 header {
 	background-image: url("../images/yellow.jpg");
 	opacity: .9;
-	width: 100%;
+	width: 100vw;
 	height:100vh;
 }
 
 .container {
-	width: 1200px;
+	width: 100vw;
 	height: 100vh;
 	margin: auto;
 	font-family:'Lato', sans-serif;
