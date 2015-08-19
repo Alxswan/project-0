@@ -33,25 +33,27 @@ var Game = {
 
 				if (Game.playon && ($(this).text() === "") && $(this).children('img').length === 0) {
 					var player = Game.playerTurn;
+
+					if (Game.bey) {
+						var add = ($(Game.beyPic));
+
+					} else if (Game.tay) {
+						var add = ($(Game.tayPic));
+
+					} else {
+						var add = ($('<p>'+player+'</p>'))
+					}
+				
+					$(this).append(add).addClass('' + player).hide().fadeIn();	
 					
-				if (Game.bey) {
-					var add = ($(Game.beyPic));
-
-				} else if (Game.tay) {
-					var add = ($(Game.tayPic));
-
-				} else {
-					var add = ($('<p>'+player+'</p>'))
-				}
-				
-				$(this).append(add).addClass('' + player).hide().fadeIn();	
-				
-				Game.gameCheck(player);
-				
-				if (Game.AI) {
-					AI.play();
-					Game.switchTurn();
-				} else Game.switchTurn();
+					Game.gameCheck(player);
+					
+					if (Game.AI) {
+						AI.play();
+						Game.switchTurn();
+					} else {
+						Game.switchTurn();
+					}
 
 				} else {
 					return;
@@ -101,6 +103,8 @@ var Game = {
 				if (Game.lastPlayerWins[i] === Game.boardSize) {
 					$('#'+player).css('display','block');
 					$('.player-turn').css('display', 'none');
+
+					$(""+AI.wins[i]).css('background-color', 'rgba(255,254,78,0.7)');
 					
 					if (player === p1){
 						Game.xWin++;
@@ -118,7 +122,7 @@ var Game = {
 		checkDraw: function() {
 			if (Game.moves === Game.boardSize * Game.boardSize) {
 				$('#draw').css('display','block');
-				$('.player-turn').css('display', 'none');
+				$('.player-turn').hide();
 				return false;
 			} else {
 				return true;
@@ -240,14 +244,12 @@ var Game = {
 				p1 = 'X';
 				p2 = 'O';
 				Game.playerTurn = p1;
-				$('#draw').css('display','none');
-				$('#X').css('display','none');
-				$('#O').css('display','none');
+				$("#draw, #X, #O, #player-2").hide();
 				$('.player-turn').css('display', 'inline-block');	
 				$('#player-1').css('display','block');
-				$('#player-2').css('display','none');
 				Game.bey = false;
 				Game.tay = false;
+				$(".square").css('background-color', 'rgba(255,254,78,0)');
 		},
 
 		resetGame: function() { 
@@ -275,15 +277,18 @@ var AI = {
 
 	wins: ['.col-1','.col-2','.col-3','.row-1','.row-2','.row-3','.diag-1','.diag-2'],
 
-	play: function() {				
-		if (Game.moves < 9 && $('.center').hasClass('X')) {
+	play: function() {		
+		if (!Game.bey){		
+			if (Game.moves < 9 && $('.center').hasClass('X')) {
+				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 
-			this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay() || this.lastResort();
+			} else if (Game.moves < 9 && !$('.center').hasClass('X')){
+					this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay();
+			}
+		} else if (Game.moves < 9 && Game.checkWin('X')){
+				   this.edgePlay() || this.cornerPlay() || this.centerPlay() || this.specialEdgePlay();
 
-		} else if (Game.moves < 9 && !$('.center').hasClass('X')){
-				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay() || this.lastResort() ;
 		}
-
 		Game.gameCheck('O');
 		Game.switchTurn();
 		return;
@@ -347,14 +352,6 @@ var AI = {
 				return true;
 			}
 		} return false; 
-	},
-
-	lastResort: function() {
-			var remainingSquares = $('.square').not($('.X,.O'));
-			if (remainingSquares.length === 2){
-			remainingSquares.eq(0).append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
-			return true;
-		}
 	}
 }
 

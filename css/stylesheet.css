@@ -1,31 +1,40 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
 
 
+header {
+	background-image: url("../images/yellow.jpg");
+	opacity: .9;
+	width: 100%;
+	height:100vh;
+}
+
 .container {
-	width: 900px;
-	height: 100%;
+	width: 1200px;
+	height: 100vh;
 	margin: auto;
 	font-family:'Lato', sans-serif;
 
 }
 
-/*button {
+button {
   position: relative;
   vertical-align: top;
   width: 90%;
   height: 50px;
   padding: 0;
+  margin-top: 6px;
   font-size: 22px;
   color: white;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 3px 4px #e2b607;
   background: #f1c40f;
+  background-image: url("../images/yellow.jpg");
   border: 0;
   border-bottom: 2px solid #e2b607;
   cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #e2b607;
-  box-shadow: inset 0 -2px #e2b607;
-}*/
+  -webkit-box-shadow: inset 0 -2px #e2d907;
+  box-shadow: inset 0 -2px #e2d907;
+}
 
 
 #row1 {
@@ -37,9 +46,28 @@
 	margin: auto;
 }
 
+.game {
+	width: 100%;
+	height: 80vh;
+
+}
+
+.controls {
+	padding-top: 40px;
+}
+
+.board {
+	position: absolute;
+	width: 600px;
+	height: 600px;
+	margin: auto;
+	padding-top: 100px;
+}
+
 .heading {
 	width: 600px;
 	margin: auto;
+	color: white;
 
 }
 
@@ -49,21 +77,28 @@ img {
 	position: absolute;
 }
 
-h1 {
+header h1 {
 	text-align: center;
-	margin-top: 40px;
-	margin-bottom: 40px;
+	height: 50vh;
+	line-height: 90vh;
+	margin: 0px;
+	font-size: 400%;
+}
+
+header h2 {
+	height: 20vh;
+	line-height: 40vh;
+	text-align: center;
 
 }
 
-
-.board {
-	position: absolute;
-	width: 600px;
-	height: 600px;
-	/*border: 2px solid black;*/
-	margin: auto;
+header h3 {
+	height: 10vh;
+	margin-top: 20px;
+	text-align: center;
+	margin-left: 140px;
 }
+
 
 .three .row {
 	width: 600px;
@@ -166,21 +201,25 @@ h1 {
 }
 
 .player-turn {
-	width: 140px;
+	width: 25%;
 	display: inline-block;
-	position: absolute;
+	text-align: center;
+	height: 60px;
+}
+
+h3 {
+	margin-right: 30px;
 }
 
 .new-game {
-	width: 140px;
+	width: 25%;
 	display: block;
-	margin-top: 50px;
+	margin-top: 0px;
 }
 
 .scoreboard {
-	width: 137px;
+	width: 25%;
 	height: 200px;
-	border: 2px solid black;
 	float: right;
 	display: inline-block;
 	margin-top: -33px;
@@ -201,23 +240,36 @@ h4{
 }
 
 h5 {
-	margin: 0.67em;
-	margin-left: 0px;
+	margin: 0;
+	margin-bottom: 4px;
+	margin-right: 30px;
+	margin-top: 12px;
+	text-align: center;
 }
 
 .winner{
-	position: absolute;
+	text-align: center;
+	width: 25%;
+	height: 60px;
+}
+
+.winner h3 {
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .mix-it-up {
-	width: 160px;
-	margin-top: 350px;
+	width: 25%;
+	margin-top: 40px;
 }
-
+.boardsize {
+	width: 25%;
+}
 .opponent {
 	margin-top: 60px;
+	width: 25%;
 	}
 
-.multi {
-	display: none;
+.turns {
+	height: 41px;
 }
