@@ -1,155 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Tic Tac Toe</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/stylesheet.css">
-	<link rel="stylesheet" href="boat/css/boatstyle.css">
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/tic-tac-toe.js"></script>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="boat/css/boatstyle.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/tic-tac-toe.js"></script>
 </head>
 
 
-<body>	
-	
-	<div class="boatcontainer">
-	
-		<div class="water top">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water top middle">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water top right">
-			<img src="images/wave.svg" alt="">
-		</div>
+<body>
 
-		<div class="water top2">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water top2 middle">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water top2 right">
-			<img src="images/wave.svg" alt="">
-		</div>
+    <div class="boatcontainer">
+
+        <div class="water top">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water top middle">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water top right">
+            <img src="images/wave.svg" alt="">
+        </div>
+
+        <div class="water top2">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water top2 middle">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water top2 right">
+            <img src="images/wave.svg" alt="">
+        </div>
 
 
-			<div class="water bottom">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water bottom middle">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water bottom right">
-			<img src="images/wave.svg" alt="">
-		</div>
-			<div class="water bottommost">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water bottommost middle">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="water bottommost right">
-			<img src="images/wave.svg" alt="">
-		</div>
-		<div class="outerboat">
-			<div class="boat">
-				<img src="images/boat10.png" alt="">
-			</div>
-		</div>
-</div>
+        <div class="water bottom">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water bottom middle">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water bottom right">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water bottommost">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water bottommost middle">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="water bottommost right">
+            <img src="images/wave.svg" alt="">
+        </div>
+        <div class="outerboat">
+            <div class="boat">
+                <img src="images/boat10.png" alt="">
+            </div>
+        </div>
+    </div>
 
-	<header>
+    <header>
 
-		<div class="heading">
-		<h1>#project-0</h1>
-		<h2>tic-tac-toe</h2>
-		<h3>by alex swan</h3>
-		</div>
-	</header>
+        <div class="heading">
+            <h1>#project-0</h1>
+            <h2>tic-tac-toe</h2>
+            <h3>by alex swan</h3>
+        </div>
+    </header>
 
-	<div class="container">
-		<div class="game">
-				<div class="board-container">
+    <div class="container">
+        <div class="game">
+            <div class="board-container">
 
-				<div class="board three">
-					<div class="row" id="row-1">
-						<div class="square col-1 diag-1 row-1 corner" id="square1"></div>
-						<div class="square col-2 row-1 edge" id="square2"></div>
-						<div class="square col-3 diag-2 row-1 corner" id="square3"></div>
-					</div>
+                <div class="board three">
+                    <div class="row" id="row-1">
+                        <div class="square col-1 diag-1 row-1 corner" id="square1"></div>
+                        <div class="square col-2 row-1 edge" id="square2"></div>
+                        <div class="square col-3 diag-2 row-1 corner" id="square3"></div>
+                    </div>
 
-					<div class="row" id="row-2">
-						<div class="square col-1 row-2 edge" id="square4"></div>
-						<div class="square col-2 diag-1 diag-2 row-2 center" id="square5"></div>
-						<div class="square col-3 row-2 edge" id="square6"></div>
-					</div>
+                    <div class="row" id="row-2">
+                        <div class="square col-1 row-2 edge" id="square4"></div>
+                        <div class="square col-2 diag-1 diag-2 row-2 center" id="square5"></div>
+                        <div class="square col-3 row-2 edge" id="square6"></div>
+                    </div>
 
-					<div class="row" id="row-3">
-						<div class="square col-1 diag-2 row-3 corner" id="square7"></div>
-						<div class="square col-2 row-3 edge" id="square8"></div>
-						<div class="square col-3 diag-1 row-3 corner" id="square9"></div>			
-					</div>
+                    <div class="row" id="row-3">
+                        <div class="square col-1 diag-2 row-3 corner" id="square7"></div>
+                        <div class="square col-2 row-3 edge" id="square8"></div>
+                        <div class="square col-3 diag-1 row-3 corner" id="square9"></div>
+                    </div>
 
-				</div>
+                </div>
 
-				</div>
+            </div>
 
-			<div class="controls">
+            <div class="controls">
 
-			<div class="new-game">
-				<button>New Game</button>
-			</div>
+                <div class="new-game">
+                    <button>New Game</button>
+                </div>
 
-		<div class="turns">
-			<div class="player-turn">
-				<h3>Next turn:</h3>
-				<div class="player" id="player-1">
-					<h4>Player 1</h4>
-				</div>
-				<div class="player" id="player-2">
-					<h4>Player 2</h4>
-				</div>
-			</div>
-			<div class="placeholder"></div>
-		</div>
-			
-			<div class="scoreboard">
-				<h2>Win tally</h2>
-				<h3>Player 1: <span id="p1-total"></span></h3>
-				<h3>Player 2: <span id="p2-total"></span></h3>
-				<button class="reset">Reset</button>
-				<button class="sail">Click to sail</button>
-			</div>
+                <div class="turns">
+                    <div class="player-turn">
+                        <h3>Next turn:</h3>
+                        <div class="player" id="player-1">
+                            <h4>Player 1</h4>
+                        </div>
+                        <div class="player" id="player-2">
+                            <h4>Player 2</h4>
+                        </div>
+                    </div>
+                    <div class="placeholder"></div>
+                </div>
 
-			<div class="winner">
-				<h3 id="X">Player 1 wins!</h3>
-				<h3 id="O">Player 2 wins!</h3>
-				<h3 id="draw">Draw!</h3>
-			</div>
+                <div class="scoreboard">
+                    <h2>Win tally</h2>
+                    <h3>Player 1: <span id="p1-total"></span></h3>
+                    <h3>Player 2: <span id="p2-total"></span></h3>
+                    <button class="reset">Reset</button>
+                    <button class="sail">Click to sail</button>
+                </div>
 
-			<div class="mix-it-up">
-				<h5>Mix it up! Player 1:</h5>
-				<button class="names">You!</button>  
-				<button class="tay">Tay</button> 
-				<button class="bey">Bey</button>  		 
-			</div>
+                <div class="winner">
+                    <h3 id="X">Player 1 wins!</h3>
+                    <h3 id="O">Player 2 wins!</h3>
+                    <h3 id="draw">Draw!</h3>
+                </div>
 
-			<div class="boardsize">
-				<h5>Challenge yourself!</h5>
-				<button class="4x4">4x4</button>
-				<button class="normal">Normal</button>
-			</div>
+                <div class="mix-it-up">
+                    <h5>Mix it up! Player 1:</h5>
+                    <button class="names">You!</button>
+                    <button class="tay">Tay</button>
+                    <button class="bey">Bey</button>
+                </div>
 
-			<div class="opponent">
-				<button class="AI">Play against Computer!</button>
-				<button class="firstplay">Computer plays first</button>
-				<button class="multi">Multiplayer</button>
-			</div>
-		</div>
-		</div>
-	</div>
+                <div class="boardsize">
+                    <h5>Challenge yourself!</h5>
+                    <button class="4x4">4x4</button>
+                    <button class="normal">Normal</button>
+                </div>
+
+                <div class="opponent">
+                    <button class="AI">Play against Computer!</button>
+                    <button class="firstplay">Computer plays first</button>
+                    <button class="multi">Multiplayer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
