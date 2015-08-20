@@ -263,6 +263,13 @@ var Game = {
 			})
 		},
 
+		multiplayer: function() {
+			$('.multi').on('click', function() {
+				Game.AI = false;
+				Game.newGame();
+			})
+		},
+
 		newGame: function() {
 		//Remove all plays from board and set variables to allow new play
 				$('.square').removeClass(''+p1);
@@ -331,7 +338,6 @@ var AI = {
 				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 			
 			} else if (Game.moves < 9 && !$('.center').hasClass('X')){
-				debugger;
 					this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 			}
 		//Allows players playing as Taylor Swift to beat AI
@@ -424,4 +430,5 @@ $(document).ready(function () {
 	Game.resetScoreboard();
 	Game.playAI();
 	Game.playAIp1();
+	Game.multiplayer();
 });
