@@ -326,11 +326,13 @@ var AI = {
 
 			//Check through each combination to see if 'true' (i.e. move possible), do that move if possible
 			//if centre is full, preference corner over edge, else preference corner
+
 			if (Game.moves < 9 && $('.center').hasClass('X')) {			
 				this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 			
 			} else if (Game.moves < 9 && !$('.center').hasClass('X')){
-					this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.edgePlay() || this.cornerPlay();
+				debugger;
+					this.winMove() || this.blockMove() || this.centerPlay() || this.specialEdgePlay() || this.cornerPlay() || this.edgePlay();
 			}
 		//Allows players playing as Taylor Swift to beat AI
 		} else if (Game.moves < 9 && Game.checkWin('X')){
@@ -354,7 +356,7 @@ var AI = {
 	//Check which corners are empty, if there are 3 or more empty play in third, 
 	//if there are 2 empty play in second, if there is 1 empty play in 1
 			var corners = $('.corner').not('.O').not('.X')
-			if (corners.length === 2){
+			if (corners.length === 2 || ($('.row-1.col-2').hasClass('X') && $('.row-2.col-3').hasClass('X'))) {
 			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
 			return true;
 			} else if (corners.length === 1){
@@ -378,7 +380,7 @@ var AI = {
 
 	specialEdgePlay: function() {
 	//Special case where in particular configuration play in adjacent edge 
-			if ($('.row-1.col-1').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-1').hasClass('O') ) {
+			if ($('.row-1.col-1').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-1').hasClass('O') && !$('.row-2.col-1').hasClass('X')) {
 				$('.row-2.col-1').append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
 				return true;
 			} else if ($('.row-1.col-3').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-3').hasClass('O') && $('.edge').not('.O').not('.X').length > 2) {
