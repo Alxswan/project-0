@@ -22,8 +22,8 @@ var Game = {
 			this.oWin = parseInt(localStorage.getItem('p2score')) || 0;	
 			this.bey = false;	
 			this.tay = false;	
-			this.beyPic = '<img src="images/bey.jpg" alt="">';	
-			this.tayPic = '<img src="images/tay.jpeg" alt="">';	
+			this.beyPic = '<img class="gamepic" src="images/bey.jpg" alt="">';	
+			this.tayPic = '<img class="gamepic" src="images/tay.jpeg" alt="">';	
 			this.boardSize = 3;
 			this.AI = false;
 			this.fourbyfour = false;
@@ -367,7 +367,7 @@ var AI = {
 				return false;
 			}
 
-			if (corners.length === 2 || ($('.row-1.col-2').hasClass('X') && $('.row-2.col-3').hasClass('X'))) {
+			if (corners.length === 2 || ($('.row-1.col-2').hasClass('X') && $('.row-2.col-3').hasClass('X')) || ($('.row-1.col-2').hasClass('X') && $('.row-3.col-3').hasClass('X'))) {
 			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
 			return true;
 			} else if (corners.length === 1){
@@ -436,4 +436,8 @@ $(document).ready(function () {
 	Game.playAI();
 	Game.playAIp1();
 	Game.multiplayer();
+
+	$('.sail').on('click', function(){
+		$('.boatcontainer').toggle();
+	})
 });
