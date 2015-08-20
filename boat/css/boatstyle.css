@@ -1,0 +1,107 @@
+@keyframes go {
+    from {margin-left: 80vw;}
+    to {margin-left: 0vw;}
+}
+
+@keyframes tip {
+    from {transform: rotate(-10deg);}
+    to {transform: rotate(10deg);}
+}
+
+
+@keyframes bob {
+    from {margin-top: 90px;}
+    to {margin-top: 110px;}
+}
+
+@keyframes bob2 {
+    from {margin-top: 100px;}
+    to {margin-top: 92px;}
+}
+
+@keyframes wavez {
+    from {z-index: 0;}
+    to {z-index: -2;}
+}
+
+.container {
+	height: 100vh;
+	width: 110vh;
+	margin-left: -15px;
+}
+
+div .outerboat {
+	position: fixed;
+	margin-top: 90px;
+	animation-name: bob;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+div .boat {
+	
+	width: 248px;
+	height: 320px;
+	
+	margin-left: 80vw;
+	z-index: -1;
+	animation-name: go;
+    animation-duration: 40s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+.boat img {
+	width: 100%;
+	height: 100%;
+	
+   	animation-name: tip;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+
+.water {
+	display: flex;
+	position: fixed;
+	margin-top: 100px;
+
+}
+
+
+.middle img {
+	margin-left: 370px;
+}
+
+.right img {
+	margin-left: 738px;
+}
+
+.bottom img{
+	margin-top: 180px;
+}
+.bottom {
+	z-index: 3;
+}
+
+ .top2 {
+	z-index: 1;
+	margin-left: 0px;
+}
+
+
+
+.top {
+	margin-top: 23px;
+	animation-name: wavez;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+.bottommost img {
+	margin-top: 360px;
+}
