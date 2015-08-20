@@ -362,6 +362,11 @@ var AI = {
 	//Check which corners are empty, if there are 3 or more empty play in third, 
 	//if there are 2 empty play in second, if there is 1 empty play in 1
 			var corners = $('.corner').not('.O').not('.X')
+
+			if ($('.row-1.col-1').hasClass('X') && $('.row-3.col-3').hasClass('X') || ($('.row-1.col-3').hasClass('X') && $('.row-3.col-1').hasClass('X')) ) {
+				return false;
+			}
+
 			if (corners.length === 2 || ($('.row-1.col-2').hasClass('X') && $('.row-2.col-3').hasClass('X'))) {
 			corners.eq(1).append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
 			return true;
