@@ -390,6 +390,7 @@ var AI = {
 	},
 
 	specialEdgePlay: function() {
+		
 	//Special case where in particular configuration play in adjacent edge 
 			if ($('.row-1.col-1').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-1').hasClass('O') && !$('.row-2.col-1').hasClass('X')) {
 				$('.row-2.col-1').append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
@@ -397,7 +398,11 @@ var AI = {
 			} else if ($('.row-1.col-3').hasClass('X') && $('.row-3.col-2').hasClass('X') && !$('.row-2.col-3').hasClass('O') && $('.edge').not('.O').not('.X').length > 2) {
 				$('.row-2.col-3').append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
 				return true;
-			} return false;
+			} else if ($('.row-1.col-3').hasClass('X') && $('.row-2.col-1').hasClass('X') && !$('.row-1.col-2').hasClass('O') && $('.edge').not('.O').not('.X').length > 2) {
+				$('.row-1.col-2').append($('<p>O</p>')).addClass('O').hide().fadeIn(4000);
+				return true;
+			}
+				return false;
 	},
 
 	blockMove: function(){
