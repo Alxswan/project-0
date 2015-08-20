@@ -25,8 +25,8 @@ HTML, CSS, Javascript, jQuery
 9. Add CSS styling
 10. Add boat - uses CSS animations
 
-###Existing problems
+###Current problems
 
-* AI count be more intuitive. 
+* AI could be more intuitive. 
 * Currently AI wins on one (known) play. Try to find it.
 * Need to refresh before sailing else it won't display.
