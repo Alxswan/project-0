@@ -115,7 +115,7 @@ var Game = {
 					$('#'+player).css('display','block');
 					$('.player-turn').css('display', 'none');
 
-					$(""+AI.wins[i]).css('background-color', 'rgba(255,254,78,0.7)');
+					$(""+AI.wins[i]).css('background-color', 'rgba(255,20,147,0.6)');
 					
 					//Increment player's win count and update scoreboard
 					if (player === p1){
@@ -204,8 +204,7 @@ var Game = {
 				$(''+AI.wins[randomNumber]).eq(2).append($('<p> Wins </p>'));
 				$('p').css('font-size', '50px');
 				$('p').css('margin-top', '100px');
-				$('.bey').html('BOW DOWN')
-				
+				$('.bey').html('BOW DOWN')			
 				})
 		},
 
@@ -234,7 +233,6 @@ var Game = {
 				$('#X').attr('id', ''+p1);
 				$('#O').attr('id', ''+p2);
 				Game.playerTurn = p1;
-
 			})
 		},
 
