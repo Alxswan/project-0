@@ -1,5 +1,26 @@
 @import url(http://fonts.googleapis.com/css?family=Lato);
 
+@media screen and (max-width: 1100px) {
+    div .board {
+		margin-top: 600px;    
+	}
+
+	.controls {
+		margin-left: 0px;
+	}
+	div .new-game {
+		width: 78%;
+	}
+	div .names, .tay, .bey, .AI, .firstplay, .multi {
+		width: 280%;
+	}
+	div .player-turn {
+		width: 72%;
+	}
+	div .boardsize {
+		display: none;
+	}
+}
 
 header {
 	background-image: url("../images/yellow.jpg");
