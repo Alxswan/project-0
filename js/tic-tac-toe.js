@@ -18,8 +18,8 @@ var Game = {
 			this.nextPlayerWins = []; //will hold the board layout of the next player
 			this.moves = 0;	
 			this.playon = true;	
-			this.xWin = 0;	
-			this.oWin = 0;	
+			this.xWin =  parseInt(localStorage.getItem('p1score')) || 0;	
+			this.oWin = parseInt(localStorage.getItem('p2score')) || 0;	
 			this.bey = false;	
 			this.tay = false;	
 			this.beyPic = '<img src="images/bey.jpg" alt="">';	
@@ -27,6 +27,9 @@ var Game = {
 			this.boardSize = 3;
 			this.AI = false;
 			this.fourbyfour = false;
+			$('#p1-total').text(localStorage.getItem('p1score'));
+			$('#p2-total').text(localStorage.getItem('p2score'));
+
 		},
 
 		play: function() {
@@ -118,9 +121,11 @@ var Game = {
 					if (player === p1){
 						Game.xWin++;
 						$('#p1-total').text(""+Game.xWin);
+						localStorage.setItem('p1score', (''+Game.xWin))
 					} else {
 						Game.oWin++;
 						$('#p2-total').text(""+Game.oWin);
+						localStorage.setItem('p2score', (''+Game.oWin))
 					}		
 					return false;
 				}  
@@ -306,6 +311,8 @@ var Game = {
 				console.log(Game.oWin)
 				$('#p1-total').text(""+Game.xWin);
 				$('#p2-total').text(""+Game.oWin);
+				localStorage.setItem('p1score', '0');
+				localStorage.setItem('p2score', '0');
 			})
 		},		
 }
