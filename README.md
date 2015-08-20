@@ -2,7 +2,7 @@
 
 ##Tic Tac Toe
 
-* This is my first game, created for General Assembly's WDI-10 in August 2015.
+* This is my first game, created for General Assembly's WDI-10 in August 2015
 
 ### Technologies
 
@@ -27,6 +27,6 @@ HTML, CSS, Javascript, jQuery
 
 ###Current problems
 
-* AI could be more intuitive. 
-* Currently AI wins on one (known) play. Try to find it.
-* Need to refresh before sailing else it won't display.
+* AI could be more intuitive
+* Currently AI wins on one (known) play. Try to find it
+* Need to refresh before sailing else it won't display
