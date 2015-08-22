@@ -2,7 +2,7 @@
 
 ##Tic Tac Toe
 
-* This is my first game, created for General Assembly's WDI-10 in August 2015
+This is my very first javascript project, created in week three of General Assembly's Web Development Immersive (WDI-10) in August 2015. The brief: first create a 2 player game of tic tac toe, then add features such as images, a larger board and AI.
 
 ### Technologies
 
