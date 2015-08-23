@@ -278,8 +278,8 @@
          $('p').fadeOut(function() {
              $('p').remove();
          });
-         $('img').fadeOut(function() {
-             $('img').remove();
+         $('img').not(".boatcontainer img").fadeOut(function() {
+             $('img').not(".boatcontainer img").remove();
          });
          Game.lastPlayerWins = [];
          Game.nextPlayerWins = [];
@@ -429,6 +429,13 @@
              }
          }
          return false;
+     },
+
+     unrelatedBoat: function(){
+         $('.sail').on('click', function() {
+            Game.initialise();
+        $('.boatcontainer').toggle();
+         })
      }
  }
 
@@ -445,8 +452,7 @@
      Game.playAI();
      Game.playAIp1();
      Game.multiplayer();
-
-     $('.sail').on('click', function() {
-         $('.boatcontainer').toggle();
-     })
+     AI.unrelatedBoat();
+    
+    
  });
