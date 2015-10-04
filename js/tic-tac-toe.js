@@ -25,8 +25,13 @@
          this.boardSize = 3;
          this.AI = false;
          this.fourbyfour = false;
+         if (localStorage.getItem('p1score') && localStorage.getItem('p2score')){
          $('#p1-total').text(localStorage.getItem('p1score'));
          $('#p2-total').text(localStorage.getItem('p2score'));
+        } else {
+            $('#p1-total').text('0')
+            $('#p2-total').text('0')
+        }
 
      },
 
