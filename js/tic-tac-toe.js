@@ -316,9 +316,6 @@
          $('button.reset').on('click', function() {
              Game.xWin = 0;
              Game.oWin = 0;
-             console.log('click')
-             console.log(Game.xWin)
-             console.log(Game.oWin)
              $('#p1-total').text("" + Game.xWin);
              $('#p2-total').text("" + Game.oWin);
              localStorage.setItem('p1score', '0');
